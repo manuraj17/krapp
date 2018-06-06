@@ -1,35 +1,18 @@
 # Base image:
-FROM ruby:2.4.1
+FROM ruby:2.4.4-alpine
 
-# Install dependencies
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev apt-transport-https ca-certificates sqlite3 libsqlite3-dev
+RUN apk --update upgrade && apk add --no-cache build-base sqlite-dev tzdata
 
-# Install nodejs and yarn
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
-RUN apt-get install -y nodejs
-RUN npm install --global yarn
-
-# Set an environment variable where the Rails app is installed to inside of Docker image:
-# ENV RAILS_ROOT /var/www/sleekr-admin
-RUN mkdir app
-
-# Set working directory, where the commands will be ran:
+RUN mkdir -p /app
 WORKDIR /app
 
-# Gems:
-COPY Gemfile Gemfile
-COPY Gemfile.lock Gemfile.lock
+COPY Gemfile .
+COPY Gemfile.lock .
 RUN gem install bundler
-RUN bundle install --without development test
+RUN bundle install
 
-# Puma
-# COPY config/puma.rb config/puma.rb
-
-# Copy the main application.
 COPY . .
-# COPY config/database.docker.yml config/database.yml
 
 EXPOSE 3000
 
-# The default command that gets ran will be to start the Puma server.
-CMD bundle exec puma -C config/puma.rb
+CMD ["bundle", "exec", "rails", "server"]
