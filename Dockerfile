@@ -13,6 +13,8 @@ RUN bundle install
 
 COPY . .
 
+RUN bundle exec rake db:migrate
+
 EXPOSE 3000
 
 CMD ["bundle", "exec", "rails", "server"]
