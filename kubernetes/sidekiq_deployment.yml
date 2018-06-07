@@ -1,0 +1,19 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: sidekiq-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: krapp-sidekiq
+  template:
+    metadata:
+        name: krapp-sidekiq
+        labels:
+          app: krapp-sidekiq
+    spec:
+      containers:
+      - name: krapp
+        image: manuraj/krapp:1.0.4
+        command: ["bundle", "exec", "sidekiq"]

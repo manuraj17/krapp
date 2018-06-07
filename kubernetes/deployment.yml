@@ -1,0 +1,20 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: krapp-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: krapp-puma
+  template:
+    metadata:
+        name: krapp
+        labels:
+          app: krapp-puma
+    spec:
+      containers:
+      - name: krapp
+        image: manuraj/krapp:latest
+        ports:
+        - containerPort: 3000
