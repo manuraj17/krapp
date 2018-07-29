@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: krapp
-        image: manuraj/krapp:1.0.4
+        image: manuraj/krapp:GKE-Kibana
         ports:
         - containerPort: 3000

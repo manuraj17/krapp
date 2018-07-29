@@ -1,0 +1,2 @@
+class Kibana < ApplicationRecord
+end

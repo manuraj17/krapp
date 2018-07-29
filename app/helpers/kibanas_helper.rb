@@ -1,0 +1,2 @@
+module KibanasHelper
+end

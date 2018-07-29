@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Kibanas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Url</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @kibanas.each do |kibana| %>
+      <tr>
+        <td><%= kibana.url %></td>
+        <td><%= link_to 'Show', kibana %></td>
+        <td><%= link_to 'Edit', edit_kibana_path(kibana) %></td>
+        <td><%= link_to 'Destroy', kibana, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Kibana', new_kibana_path %>

@@ -1,0 +1,22 @@
+<%= form_with(model: kibana, local: true) do |form| %>
+  <% if kibana.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(kibana.errors.count, "error") %> prohibited this kibana from being saved:</h2>
+
+      <ul>
+      <% kibana.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :url %>
+    <%= form.text_area :url, id: :kibana_url %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
